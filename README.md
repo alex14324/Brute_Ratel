@@ -3,24 +3,8 @@
 DNS Over HTTPS
 
 Alongside the default HTTPS connections, Badger's DNS over HTTPS provides usability of newly bought domains without the the need of domain fronting or redirector, all the while providing a backup option to be able to switch to other HTTPS profiles on the fly
+Feature Additions:Ratel Server/Badger
 
-Various Out-Of-Box Evasion Capabilities
-Evasion Capabilities 	x64 Support 	x86 Support 	x86 on Wow64 Support
-Indirect System Calls 	Yes 	Yes 	Yes
-Hide Shellcode Sections in Memory 	Yes 	Yes 	Yes
-Multiple Sleeping Masking Techniques 	Yes 	No 	No
-Unhook EDR Userland Hooks and Dlls 	Yes 	No 	No
-Unhook DLL Load Notifications 	Yes 	No 	No
-LoadLibrary Proxy for ETW Evasion 	Yes 	No 	No
-Thread Stack Encryption 	Yes 	Yes 	Yes
-Badger Heap Encryption 	Yes 	Yes 	Yes
-Masquerade Thread Stack Frame 	Yes 	Yes 	Yes
-Hardware Breakpoint for AMSI/ETW Evasion 	Yes 	Yes 	Yes
-Reuse Virtual Memory For ETW Evasion 	Yes 	Yes 	Yes
-Reuse Existing Libraries from PEB 	Yes 	Yes 	Yes
-Secure Free Badger Heap for Volatility Evasion 	Yes 	Yes 	Yes
-Advanced Module Stomping with PEB Hooking 	Yes 	Yes 	Yes
-In-Memory PE and RDLL Execution 	Yes 	Yes 	Yes
-In-Memory BOF Execution 	Yes 	Yes 	Yes
-In-Memory Dotnet Execution 	Yes 	Yes 	Yes
-Network Malleability 	Yes 	Yes 	Yes
+LDAP Sentinel
+
+This release brings in support for sleep and jitter for LDAP Sentinel with the ‘sentinel_sleep’ command. Using this, operators can provide an interval between every single LDAP request to the Domain Controller. Unlike previous releases, this version of LDAP Sentinel supports SASL authentication with a fallback mechanism to the default kerberos authentication. The SASL authentication consists of encrypted messages inside the LDAP “bind” requests and responses. The “bind” request contains the distinguished name of the directory object that Badger wishes to authenticate as either with an impersonated token or directly. This feature was added to support forced Certificate SASL authentication within some environments. Interestingly, this also provides better evasion against network based IDS which build detections against known LDAP queries from unencrypted data or by tracking multiple LDAP queries originating from one source and then tagging it as an anomaly. Due to the encrypted nature of the SASL authentication, it becomes difficult for various detection systems which do not handle SASL. Apart from these changes, LDAP Sentinel also supports attribute filtering. An operator can now provide multiple attribute filters within LDAP filters to limit search output to requested attributes. The below example shows attribute filters (name, distinguishedName, lastlogon and objectSid) added to the LDAP query to search user objects.
